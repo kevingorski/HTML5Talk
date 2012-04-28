@@ -1,0 +1,18 @@
+{
+  "author": "Kevin Gorski <kevin.gorski@gmail.com> (http://kevingorski.com)",
+  "name": "HTML5Talk",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "main": "app.js",
+  "dependencies": {
+	"express" : "*",
+	"socket.io" : "*"
+	},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}

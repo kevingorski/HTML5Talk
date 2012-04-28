@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>HTML5 is for Web Apps: Console</title>
+	
+	<meta name="description" content="HTML5 for great justice">
+	<meta name="author" content="Kevin Gorski">
+	<!-- <meta name="viewport" content="width=1024, user-scalable=no"> -->
+	
+	<script src="modernizr.custom.js"></script>
+	<script type="text/javascript" src="http://use.typekit.com/tcy2nuw.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	
+	<style type="text/css">
+    #canvas {
+      border:solid black 1px;
+    }
+
+	#Clear {
+		height: 5em;
+		font-size: 5em;
+	}
+  </style>
+</head>
+
+<body class="deck-container">
+	<h1>Command console</h1>
+	<fieldset>
+		<label for="SlideNumber">Go to Slide #:</label><input id="SlideNumber" type="number" />
+		<button id="UpdateSlide">Update</button>
+	</fieldset>
+	<canvas id="canvas" width="600" height="600">
+		You really badly need to use a different browser.
+	</canvas>
+	
+	<button id="Clear">Clear</button>
+	
+	<script src="jquery-1.7.min.js"></script>
+	<script src="jquery.lettering-0.6.1.min.js"></script>
+	<script src="jquery.slabtext.min.js"></script>
+
+	<script src="/socket.io/socket.io.js"></script>
+
+	<!-- Specific to this page -->
+	<script>
+	
+	var socket = io.connect(),
+		origin = {},
+		canvas,
+		ctx;
+
+	socket.on('news', function (data) {
+	  console.log(data);
+	});
+	
+	
+	$(function() {
+		// $('#title-slide h1').slabText();
+		$('#UpdateSlide').click(function() {
+			socket.emit('goToSlide', {slide: parseInt($('#SlideNumber').val()) - 1 });
+		});
+		
+		$('#Clear').click(function() {
+			ctx.clearRect ( 0 , 0 , canvas.width , canvas.height );
+
+			socket.emit('clearCanvas');
+		});
+	
+		canvas = $('#canvas')[0];
+		ctx = canvas.getContext("2d");
+		
+		canvas.onmousedown = canvas.ontouchstart = startDrag;
+	});
+	
+	function endDrag(at) {
+		var data = {
+			originX: origin[0],
+			originY: origin[1],
+			destinationX: at[0],
+			destinationY: at[1]
+		};
+		
+		ctx.lineWidth = 4;
+		ctx.fillStyle = '#000000';
+		ctx.beginPath();
+		ctx.moveTo(data.originX, data.originY);
+		ctx.lineTo(data.destinationX, data.destinationY);
+		ctx.closePath();
+		ctx.stroke();
+		
+		socket.emit('drawLine', data);
+	}
+	
+	function startDrag(e) {
+		if (e.type === 'touchstart') {
+			canvas.onmousedown = null;
+			canvas.ontouchmove = moveDrag;
+			canvas.ontouchend = canvas.ontouchcancel = function (endE) {
+				canvas.ontouchmove = null;
+				canvas.ontouchend = null;
+				canvas.ontouchcancel = null;
+				canvas.ontouchstart = startDrag; // necessary for Dolfin; this is a bug
+				var coors = [];
+				
+				if (endE.changedTouches && endE.changedTouches.length) { 
+					coors[0] = endE.changedTouches[endE.changedTouches.length - 1].pageX - canvas.offsetLeft;
+					coors[1] = endE.changedTouches[endE.changedTouches.length - 1].pageY - canvas.offsetTop;
+				}
+				
+				endDrag(coors);
+			}
+		} else {
+			document.onmousemove = moveDrag;
+			document.onmouseup = function (upE) {
+				document.onmousemove = null;
+				document.onmouseup = null;
+				
+				endDrag(getCoors(upE));
+			}
+		}
+	
+		origin = getCoors(e);
+	
+		function moveDrag (e) {
+			//var currentPos = getCoors(e);
+		
+			return false;
+			/* cancels scrolling; Android 2.1 needs this ontouchstart, but that's a bug.
+			iPhone and Android 2.2 allow it ontouchstart, but also ontouchmove
+			Dolfin requires it ontouchmove */
+		}
+	
+		function getCoors(e) {
+			var coors = [];
+			if (e.touches && e.touches.length) { 
+				coors[0] = e.touches[0].pageX;
+				coors[1] = e.touches[0].pageY;
+			} else {
+				coors[0] = e.clientX;
+				coors[1] = e.clientY;
+			}
+			
+			coors[0] -= canvas.offsetLeft;
+			coors[1] -= canvas.offsetTop;
+			
+			return coors;
+		}
+	}
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+/* For SlabText */
+.slabtexted .slabtext
+        {
+        display:-moz-inline-box;
+        display:inline-block
+        white-space:nowrap;
+        }
+.slabtextinactive .slabtext
+        {
+        display:inline;
+        white-space:normal;
+        font-size:1em !important;
+        letter-spacing:inherit !important;
+        word-spacing:inherit !important;
+        *letter-spacing:0 !important;
+        *word-spacing:0 !important;
+        }
+.slabtextdone .slabtext
+        {
+        display:block
+        }
+
+/* Actual customization */
+
+body {
+	background-image: url('themes/little_pluses.png');
+}
+
+.deck-container .deck-status {
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 0.5em;
+	color: #f33;
+	font-weight: bold;
+	padding: 1em;
+	text-align: right;
+	width: 3.5em;
+}
+
+section.slide { 
+	background-color: white;
+	background-image: url('themes/grid_noise.png');
+	border-radius: 1em;
+	box-shadow: 4px 4px 5px 6px #999;
+	margin: 1em 0;
+	min-height: 95%;
+}
+
+#title-slide h1 {
+	color: #C00;
+	font-family: "quatro-slab",serif;
+	font-size: 7.5em;
+	text-shadow: 0.025em 0.025em black;
+	top: 15%;
+}
+
+.slide blockquote {
+	border: thin solid #777;
+	border-left: 1em solid #777;
+	box-shadow: 0 0 5px #777;
+	padding-top: 1em;
+}
+
+.slide cite {
+	font-style: italic;
+}
+
+.slide blockquote p,
+.slide blockquote ul {
+	padding: 0 1em;
+}
+
+.slide blockquote .attribution {
+	background-color: hsla(53, 34%, 50%, 0.5);
+	padding: 1em;
+}
+
+li.pro {
+	color: green;
+}
+
+li.con {
+	color: red;
+}
+
+
+/* Sizing */
+body.deck-container {
+	font-size: 24px;
+}
+
+.slide h1 {
+	font-size: 4.5em;
+}
+
+.slide h2 {
+	font-size: 2.25em;
+}
+
+/* Custom Fonts */
+.slide h1,
+.slide h2,
+.deck-container .deck-status {
+	font-family: "crete-rounded-web",sans-serif;
+}
+
+.deck-container .slide {
+	font-family: "superclarendon",sans-serif;
+}
+
+
+/* Demos */
+#InputTypes label, details label {
+	display: block;
+	float: left;
+	width: 12em;
+}
+
+#InputTypes button {
+	margin: 1em 0 0 12em;
+}
+
+input:required:invalid, input:focus:invalid {
+	background-color: hsl(0, 100%, 85%);
+}
+
+input:-moz-placeholder {
+	color: hsl(0, 0%, 55%);
+}
+
+#Calc {
+	background: hsl(240, 17%, 60%);
+	border-radius: 0.25em;
+	border: 3px solid hsl(240, 17%, 85%);
+	border-right-color: hsl(240, 17%, 45%);
+	border-bottom-color: hsl(240, 17%, 35%);
+	border-left-color: hsl(240, 17%, 75%);
+	box-shadow: 
+		hsl(240, 17%, 35%) 3px 3px 0 0, 
+		hsl(240, 17%, 30%) 0.2em 0.2em 0 0,
+		hsl(240, 17%, 20%) 0.3em 0.3em 5px 5px;
+	margin: 0 auto 1em;
+	padding: 1em 0 0 1em;
+	width: 15.7em;
+	-khtml-user-select: none;
+}
+
+#Calc .Display {
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D1E32B), to(#737130));
+	border-radius: 0.25em;
+	border: 2px solid hsl(240, 17%, 85%);
+	border-left-color: hsl(240, 17%, 45%);
+	border-top-color: hsl(240, 17%, 35%);
+	border-right-color: hsl(240, 17%, 75%);
+	display: block;
+	font-family: monospace;
+	font-size: 2em;
+	margin-bottom : 0.5em;
+	padding: 0 0.25em;
+	text-align: right;
+	width: 6.85em;
+	-webkit-transition: -webkit-transform 0.8s ease;
+	transition: transform 0.8s ease;
+}
+
+#Calc .Display:hover {
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+#Calc ol {
+	margin: 0;
+}
+
+#Calc li {
+	display: inline-block;
+	margin: 0 1em 1em 0;
+	width: 4em;
+	vertical-align: top;
+}
+
+#Calc ol button {
+	background-color: hsl(218, 42%, 75%);
+	background-image: -webkit-linear-gradient(top, hsl(218, 42%, 75%), hsl(218, 31%, 57%));
+	background-image: linear-gradient(top, hsl(218, 42%, 75%), hsl(218, 31%, 57%));
+	border-top: 1px solid hsl(217, 33%, 59%);
+	border-right: 1px solid hsl(217, 27%, 55%);
+	border-bottom: 1px solid hsl(218, 22%, 46%);
+	border-left: 1px solid hsl(217, 27%, 55%);
+	border-radius: 0.5em;
+	box-shadow: 
+		0px 1px 0 hsl(221, 45%, 21%), 
+		0 6px 0px hsl(220, 46%, 22%), 
+		2px 8px 4px 1px hsl(0, 0%, 7%);
+	color: #fff;
+	font: bold 20px;
+	line-height: 1;
+	margin-bottom: 10px;
+	padding: 10px 0 12px 0;
+	text-align: center;
+	text-shadow: 0px -1px 1px #1e2d4d;
+	-webkit-background-clip: padding-box;
+	height: 4em;
+	width: 4em;
+}
+
+#Calc ol button:hover {
+	background-color: hsl(218, 45%, 75%);
+	background-image: -webkit-linear-gradient(top, hsl(218, 45%, 75%), hsl(218, 36%, 63%));
+	background-image: linear-gradient(top, hsl(218, 45%, 75%), hsl(218, 36%, 63%));
+	border-top: 1px solid hsl(217, 28%, 55%);
+	border-right: 1px solid hsl(217, 23%, 51%);
+	border-bottom: 1px solid hsl(218, 23%, 43%);
+	border-left: 1px solid hsl(217, 23%, 51%);
+	box-shadow:
+		0px 1px 0 hsl(221, 45%, 21%), 
+		0 6px 0px hsl(220, 46%, 22%), 
+		2px 8px 4px 1px hsl(0, 0%, 7%);
+	color: #ddd;
+	cursor: pointer;
+	
+	-webkit-animation: pulse 1.25s infinite ease-in-out;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+		color: #fff;
+	}
+    50% {
+		color: #D1E32B;
+	}
+    100% {
+		color: #fff;
+	}
+}
+
+#Calc ol button:active {
+	background-color: hsl(218, 32%, 70%);
+	background-image: -webkit-linear-gradient(top, hsl(218, 32%, 70%), hsl(218, 26%, 53%));
+	background-image: linear-gradient(top, hsl(218, 32%, 70%), hsl(218, 26%, 53%));
+    box-shadow: 
+		0 1px 0 hsl(221, 45%, 21%), 
+		0 2px 0 hsl(220, 46%, 22%), 
+		2px 4px 3px 0 hsl(0, 0%, 7%);
+	color: hsl(0, 0%, 90%);
+    margin: 4px 0 6px 0;
+	-webkit-animation: none;
+}
+
+#Calc ol li:last-child button, 
+#Calc ol li:nth-last-child(3) button {
+	background-color: hsl(58, 42%, 75%);
+	background-image: -webkit-linear-gradient(top, hsl(58, 42%, 75%), hsl(58, 31%, 57%));
+	background-image: linear-gradient(top, hsl(58, 42%, 75%), hsl(58, 31%, 57%));
+	border-top: 1px solid hsl(57, 33%, 59%);
+	border-right: 1px solid hsl(57, 27%, 55%);
+	border-bottom: 1px solid hsl(58, 22%, 46%);
+	border-left: 1px solid hsl(57, 27%, 55%);
+	box-shadow: 
+		0px 1px 0 hsl(51, 45%, 21%), 
+		0 6px 0px hsl(50, 46%, 22%), 
+		2px 8px 4px 1px hsl(0, 0%, 7%);
+}
+
+#Calc ol li:last-child button:hover, 
+#Calc ol li:nth-last-child(3) button:hover {
+	background-color: hsl(58, 45%, 75%);
+	background-image: -webkit-linear-gradient(top, hsl(58, 45%, 75%), hsl(58, 36%, 63%));
+	background-image: linear-gradient(top, hsl(58, 45%, 75%), hsl(58, 36%, 63%));
+	border-top: 1px solid hsl(57, 28%, 55%);
+	border-right: 1px solid hsl(57, 23%, 51%);
+	border-bottom: 1px solid hsl(58, 23%, 43%);
+	border-left: 1px solid hsl(57, 23%, 51%);
+	box-shadow:
+		0px 1px 0 hsl(51, 45%, 21%), 
+		0 6px 0px hsl(50, 46%, 22%), 
+		2px 8px 4px 1px hsl(0, 0%, 7%);
+	color: #ddd;
+}
+
+#Calc ol li:last-child button:active, 
+#Calc ol li:nth-last-child(3) button:active {
+	background-color: hsl(58, 32%, 70%);
+	background-image: -webkit-linear-gradient(top, hsl(58, 32%, 70%), hsl(58, 26%, 53%));
+	background-image: linear-gradient(top, hsl(58, 32%, 70%), hsl(58, 26%, 53%));
+	box-shadow: 
+		0 1px 0 hsl(51, 45%, 21%), 
+		0 2px 0 hsl(50, 46%, 22%), 
+		2px 4px 3px 0 hsl(0, 0%, 7%);    
+}
+
+/* Media queries */
+@media (max-width: 960px) {
+	body {
+		background-image: url(http://resources.homeaway.com/resources/8af19157/images/homepage-background.jpg);
+		background-color: rgb(161, 193, 227); 
+		background-position: 50% 0%; 
+		background-repeat: no-repeat no-repeat;
+	}
+	.slide h1, .slide h2 {
+		color: rgb(161, 193, 227);
+	}
+}
+
+#canvas {
+	background: white;
+	border:solid black 1px;
+}
