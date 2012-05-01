@@ -260,10 +260,11 @@
 <script>
 var socket = io.connect(),
 	canvas,
-	ctx;
+	ctx,
+	color = '#'+Math.floor(Math.random()*16777215).toString(16);
 
 socket.on('news', function (data) {
-  console.log(data);
+	if(console) console.log(data);
 });
 
 socket.on('goToSlide', function (data) {
@@ -272,11 +273,17 @@ socket.on('goToSlide', function (data) {
 
 socket.on('drawLine', function(data) {
 	ctx.lineWidth = 4;
-	ctx.fillStyle = '#000000';
+	ctx.strokeStyle = data.color;
 
 	ctx.beginPath();
 	ctx.moveTo(data.originX, data.originY);
-	ctx.lineTo(data.destinationX, data.destinationY);
+	
+	for(var i=0, point; i<data.path.length; i++) {
+		point = data.path[i]
+		ctx.lineTo(point[0], point[1]);
+		ctx.moveTo(point[0], point[1]);
+	}
+	
 	ctx.closePath();
 
 	ctx.stroke();
@@ -294,8 +301,6 @@ $(function() {
 		socket.emit('slideChange', { from: from, to: to });
 	});
 
-	// $('#title-slide h1').slabText();
-	
 	var display = $('#Calc .Display');
 	
 	$('#Calc button').live('click', function() {
@@ -317,7 +322,79 @@ $(function() {
 	
 	canvas = $('#canvas')[0];
 	ctx = canvas.getContext("2d");
+	
+	canvas.onmousedown = canvas.ontouchstart = startDrag;
 });
+
+
+function startDrag(e) {
+	if (e.type === 'touchstart') {
+		canvas.onmousedown = null;
+		canvas.ontouchmove = moveDrag;
+		canvas.ontouchend = canvas.ontouchcancel = function (endE) {
+			canvas.ontouchmove = null;
+			canvas.ontouchend = null;
+			canvas.ontouchcancel = null;
+			canvas.ontouchstart = startDrag; // necessary for Dolfin; this is a bug
+			
+			var coors = [];
+			
+			if (endE.changedTouches && endE.changedTouches.length) { 
+				for(var i=0, point; i<endE.changedTouches.length; i++) {
+					point = endE.changedTouches[i];
+					coors.push([
+						point.pageX - canvas.offsetLeft,
+						point.pageY - canvas.offsetTop]);
+				}
+			}
+			
+			endDrag(coors);
+		}
+	} else {
+		document.onmousemove = moveDrag;
+		document.onmouseup = function (upE) {
+			document.onmousemove = null;
+			document.onmouseup = null;
+			
+			endDrag([getCoors(upE)]);
+		}
+	}
+
+	origin = getCoors(e);
+
+	function moveDrag (e) {
+		//var currentPos = getCoors(e);
+
+		return false;
+		/* cancels scrolling; Android 2.1 needs this ontouchstart, but that's a bug.
+		iPhone and Android 2.2 allow it ontouchstart, but also ontouchmove
+		Dolfin requires it ontouchmove */
+	}
+
+	function endDrag(at) {
+		socket.emit('drawLine', {
+			originX: origin[0],
+			originY: origin[1],
+			path: at,
+			color: color
+		});
+	}
+
+	function getCoors(e) {
+		var coors = [];
+		if (e.touches && e.touches.length) { 
+			coors[0] = e.touches[0].pageX - canvas.offsetLeft;
+			coors[1] = e.touches[0].pageY - canvas.offsetTop;
+		} else {
+			var offset = $(canvas).offset();
+			
+			coors[0] = e.clientX - offset.left;
+			coors[1] = e.clientY - offset.top;
+		}
+		
+		return coors;
+	}
+}
 </script>
 
 </body>

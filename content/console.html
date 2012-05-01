@@ -53,7 +53,8 @@
 	var socket = io.connect(),
 		origin = {},
 		canvas,
-		ctx;
+		ctx,
+		color = '#'+Math.floor(Math.random()*16777215).toString(16);
 
 	socket.on('news', function (data) {
 	  console.log(data);
@@ -61,7 +62,6 @@
 	
 	
 	$(function() {
-		// $('#title-slide h1').slabText();
 		$('#UpdateSlide').click(function() {
 			socket.emit('goToSlide', {slide: parseInt($('#SlideNumber').val()) - 1 });
 		});
@@ -82,15 +82,21 @@
 		var data = {
 			originX: origin[0],
 			originY: origin[1],
-			destinationX: at[0],
-			destinationY: at[1]
+			path: at,
+			color: color
 		};
 		
 		ctx.lineWidth = 4;
-		ctx.fillStyle = '#000000';
+		ctx.strokeStyle = data.color;
 		ctx.beginPath();
 		ctx.moveTo(data.originX, data.originY);
-		ctx.lineTo(data.destinationX, data.destinationY);
+		
+		for(var i=0, point; i<at.length; i++) {
+			point = at[i];
+			ctx.lineTo(point[0], point[1]);
+			ctx.moveTo(point[0], point[1]);
+		}
+		
 		ctx.closePath();
 		ctx.stroke();
 		
@@ -106,11 +112,16 @@
 				canvas.ontouchend = null;
 				canvas.ontouchcancel = null;
 				canvas.ontouchstart = startDrag; // necessary for Dolfin; this is a bug
+				
 				var coors = [];
 				
 				if (endE.changedTouches && endE.changedTouches.length) { 
-					coors[0] = endE.changedTouches[endE.changedTouches.length - 1].pageX - canvas.offsetLeft;
-					coors[1] = endE.changedTouches[endE.changedTouches.length - 1].pageY - canvas.offsetTop;
+					for(var i=0, point; i<endE.changedTouches.length; i++) {
+						point = endE.changedTouches[i];
+						coors.push([
+							point.pageX - canvas.offsetLeft,
+							point.pageY - canvas.offsetTop]);
+					}
 				}
 				
 				endDrag(coors);
@@ -121,7 +132,7 @@
 				document.onmousemove = null;
 				document.onmouseup = null;
 				
-				endDrag(getCoors(upE));
+				endDrag([getCoors(upE)]);
 			}
 		}
 	
