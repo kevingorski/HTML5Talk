@@ -32,12 +32,20 @@
 
 <body class="deck-container">
 
-
-
 <section class="slide" id="title-slide">
 	<h1><abbr>HTML5</abbr></h1>
 	<img src="HTML5_Badge.svg" height="60%" width="60%" style="margin-top: 30%;" />
 </section>
+
+<section class="slide">
+	<h2>The plan</h2>
+	<ul>
+		<li>What is <abbr>HTML5</abbr>? (quick I promise)</li>
+		<li>Demos</li>
+		<li>Backwards&ndash;compatible + latest features = <nobr><em>crazy delicious</em></nobr></li>
+	</ul>
+</section>
+
 
 <section class="slide">
 	<h2><abbr>HTML5</abbr> is for Web Applications</h2>
@@ -54,6 +62,7 @@
 		<li>Additions &amp; changes to <abbr>HTML</abbr></li>
 		<li>New <abbr>CSS</abbr> selectors &amp; styles</li>
 		<li>New JavaScript <abbr>API<abbr>s</li>
+		<li>Continuously evolving set of specs</li>
 	</ul>
 </section>
 
@@ -69,18 +78,10 @@
 <section class="slide">
 	<h2>Some things do change</h2>
 	<ul>
-		<li>Web Hypertext Application Technology Working Group is Apple, Mozilla, Opera</li>
+		<li><em>Web Hypertext Application Technology Working Group</em> is Apple, Mozilla, Opera</li>
 		<li><abbr>W3C</abbr> has committed to following the <abbr>WHATWG</abbr>&rsquo;s lead</li>
 		<li><abbr>WHATWG</abbr> determines what will eventually be the standard</li>
-		<li><abbr>WHATWG</abbr> recently became a Community Group, which makes it open to participation</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>The plan</h2>
-	<ul>
-		<li>Feature demos</li>
-		<li>Managing browser feature sets</li>
+		<li><abbr>WHATWG</abbr> recently became a Community Group, which opens it to public participation</li>
 	</ul>
 </section>
 
@@ -94,6 +95,15 @@
 			<div><label for="Number">Number (0-9)</label><input id="Number" type="number" min="0" max="9" required="true" title="0-9" /></div>
 			<div><label for="FavoriteBrowser">Favorite Browser</label><input id="FavoriteBrowser" list="Browsers" required="true" /></div>
 		</fieldset>
+		<datalist id="Browsers">
+			<option value="Chrome">
+			<option value="Firefox">
+			<option value="Internet Explorer">
+			<option value="Lynx">
+			<option value="Mosaic">
+			<option value="Opera">
+			<option value="Safari">
+		</datalist>
 		<details>
 			<summary>Right this way...</summary>
 			<div>
@@ -113,42 +123,6 @@
 		</details>
 		<button type="submit">Register</button>
 	</form>
-	<ul style="margin-top: 2em;">
-		<li>There&rsquo;s also an <abbr>API</abbr> for client&ndash;side validation</li>
-		<li>field.setCustomValidity()</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Other Form Functionality</h2>
-	<ul>
-		<li>Other input types: 
-			<ul>
-				<li>search</li>
-				<li>range (slider)</li>
-				<li>color</li>
-				<li>date, date time, time, month</li>
-			</ul>
-		</li>
-		<li>Other input features: 
-			<ul>
-				<li>autofocus</li>
-				<li>autocomplete</li>
-				<li>spellcheck</li>
-			</ul>
-		</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Other UI Elements</h2>
-	<ul>
-		<li>dialogs</li>
-		<li>menus</li>
-		<li>command</li>
-		<li>nav</li>
-		<li>hgroup, footer</li>
-	</ul>
 </section>
 
 <section class="slide">
@@ -177,7 +151,7 @@
 	<ul>
 		<li>Media queries for targeting device display profiles</li>
 		<li>Touch events</li>
-		<li>Server-Sent Events, WebSockets, WebRTC</li>
+		<li>Server-Sent Events, WebSockets</li>
 		<li>Canvas &amp; <abbr>SVG</abbr></li>
 	</ul>
 </section>
@@ -190,42 +164,16 @@
 </section>
 
 <section class="slide">
-	<h2>Fun: Media &amp; Graphics</h2>
-	<!--
-		geolocation
-		video, audio, WebGL
-		media capture?
-	-->	
-</section>
-
-
-<section class="slide">
-	<h2>Things that are cool but require more specific use-cases</h2>
+	<h2>So Much More</h2>
 	<ul>
+		<li>Video, audio playback</li>
+		<li>WebGL</li>
+		<li>Geolocation</li>
+		<li>Network, battery information</li>
         <li>Client-side storage</li>
-        <li>Offline support</li>
+		<li>On and on...</li>
     </ul>
-	<!--
-		Changes that just aren't that interesting, useful, or implemented yet
-			semantic changes
-			some new element types
-				header, hgroup, footer, nav, section, article, aside, address, figure, figcaption, 
-			Content editable
-			new doctype declaration
-			Offline pages & application caches
-			Web Workers
-			network, battery information
-			audio processing
-			Drag & drop
-			clipboard api
-			Custom browsing history manipulation
-			Web notifications
-			JS APIs and feature detection
-			native implementations of DOM functions that look a lot like jQuery
-	-->
-
 </section>
-
 
 <section class="slide oneshot">
 	<h1>When can we use this?</h1>
@@ -233,50 +181,31 @@
 
 <!-- Browser compatibility -->
 <section class="slide">
-	<h2>Better, faster, stronger dev tools</h2>
+	<h2><abbr>HTML5</abbr> IS NOW</h2>
 	<ul>
-		<li>Defending the latest browser version
-			<ul>
-				<li>It's ok if not every browser gets the same experience as long as it's good enough</li>
-				<li>http://caniuse.com</li>
-			</ul>
-		</li>
-		<li>Modernizr + yepnope + polyfills</li>
-		<li>Teach VisualStudio some manners
-			<ul><li>HTML5 / CSS3 / better markup extensions to VS</li></ul>
-		</li>	
-		<li>Hey, what about IE?
-			<ul><li><a href="http://css3pie.com/">CSS3 PIE</a></li></ul>
-		</li>
+		<li>Good browsers handle features they don't support gracefully</li>
+		<li><abbr>IE</abbr> only requires a few lines of JavaScript to not crash</li>
+		<li>Browsers can be augmented with new features via JavaScript, Flash, etc</li>
+		<li>Check browser market status with <a href="http://caniuse.com">Can I Use?</a></li>
+		<li>How do we tell when to apply polyfills without having a new problem?</li>
 	</ul>
 </section>
 
+<section class="slide">
+	<h2>Detect Features, Not Browsers</h2>
+	<ul>
+		<li>Feature detection with <a href="http://modernizr.com/">Modernizr</a></li>
+		<li>Emits JavaScript to fix <abbr>IE</abbr></li>
+		<li>Adds CSS classes for styling features to <code>body</code> element</li>
+		<li>yepnope <abbr>API</abbr> for JavaScript</li>
+		<li>Polyfills sold separately</li>
+	</ul>
+</section>
 
 <!-- CLOSING -->
 
 <section class="slide">
-	<h2>More</h2>
-	<ul>
-		<li>Diving into <abbr>HTML5</abbr></li>
-		<li>A List Apart</li>
-		<li>Smashing Magazine</li>
-	</ul>
-</section>
-
-<section class="slide">
-	<h2>Example</h2>
-	<textarea class="code" mode="javascript" style="display: none;" runnable="true">
-
-	</textarea>
-	<datalist id="Browsers">
-		<option value="Chrome">
-		<option value="Firefox">
-		<option value="Internet Explorer">
-		<option value="Lynx">
-		<option value="Mosaic">
-		<option value="Opera">
-		<option value="Safari">
-	</datalist>
+	<h1>The Final <abbr>HTML5</abbr></h1>
 </section>
 
 
