@@ -85,7 +85,7 @@
 </section>
 
 <section class="slide">
-	<h2>Fuctional Forms</h2>
+	<h2>Fuctional Forms &amp; <abbr>UI</abbr> Elements</h2>
 	<form action="post" id="InputTypes">
 		<fieldset>
 			<div><label for="Email">Email</label><input id="Email" type="email" placeholder="user@host.tld" required="true" autocomplete="off" /></div>
@@ -94,6 +94,23 @@
 			<div><label for="Number">Number (0-9)</label><input id="Number" type="number" min="0" max="9" required="true" title="0-9" /></div>
 			<div><label for="FavoriteBrowser">Favorite Browser</label><input id="FavoriteBrowser" list="Browsers" required="true" /></div>
 		</fieldset>
+		<details>
+			<summary>Right this way...</summary>
+			<div>
+				<section>
+					<label>20% progress</label>
+					<progress value="20" max="100">
+						20%...
+					</progress>
+				</section>
+				<section>
+					<label>95% meter</label>
+					<meter value="95" max="100">
+						95%...
+					</meter>
+				</section>
+			</div>
+		</details>
 		<button type="submit">Register</button>
 	</form>
 	<ul style="margin-top: 2em;">
@@ -121,27 +138,6 @@
 			</ul>
 		</li>
 	</ul>
-</section>
-
-<section class="slide">
-	<h2>Common UI Elements</h2>
-	<details>
-		<summary>Right this way...</summary>
-		<div>
-			<section>
-				<label>20% progress</label>
-				<progress value="20" max="100">
-					20%...
-				</progress>
-			</section>
-			<section>
-				<label>95% meter</label>
-				<meter value="95" max="100">
-					95%...
-				</meter>
-			</section>
-		</div>
-	</details>
 </section>
 
 <section class="slide">
@@ -333,7 +329,7 @@
 
 <!-- Specific to this page -->
 <script>
-var socket = io.connect('http://localhost'),
+var socket = io.connect(),
 	canvas,
 	ctx;
 
