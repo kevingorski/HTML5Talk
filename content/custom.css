@@ -45,13 +45,21 @@ section.slide {
 	min-height: 95%;
 }
 
-#title-slide h1 {
+#title-slide h1{
 	color: #C00;
 	font-family: "quatro-slab",serif;
 	font-size: 7.5em;
 	text-shadow: 0.025em 0.025em black;
 	top: 15%;
 }
+
+#closing-slide h1  {
+	color: #C00;
+	font-family: monospace;
+	font-size: 7.5em;
+	text-shadow: 0.025em 0.025em black;
+	top: 15%;
+}}
 
 .slide blockquote {
 	border: thin solid #777;
